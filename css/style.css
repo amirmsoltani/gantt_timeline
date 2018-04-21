@@ -1,0 +1,49 @@
+.FI{
+    border: solid 1px #0f0f0f;
+}
+
+.but{
+    width: 100px;
+    margin-bottom: 10px;
+}
+.box
+{
+   text-align: center;
+    width: 100%;
+    margin-top: 1.5vmax;
+    text-align-all: center;
+    align-items: center;
+}
+.form-control
+{
+    text-align: center;
+    text-align-all: center;
+}
+tr,th,td,select,option{text-align: center}
+
+.gantt
+{
+    border: none;
+    border-top: none;
+}
+.gantt tbody tr td,.gantt tbody tr th{
+    border-top: none;
+}
+.gantt tbody tr th{
+    text-align: left;
+}
+.gantt tbody tr td{
+    border: #8a6d3b groove 3px;
+    text-align: center;
+}
+
+#tabhead{
+    text-align: center;
+    color: #1b6d85;
+}
+#tabavg{
+    text-align: center;
+    color: #2b542c;
+
+}
+
