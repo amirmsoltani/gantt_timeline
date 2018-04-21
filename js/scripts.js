@@ -182,7 +182,3 @@ function reset() {
     $("#reset").prop('disabled', true);
 
 }
-function copy(l)
-{
-    return l;
-}
