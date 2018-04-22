@@ -174,6 +174,34 @@ function process() {
                 }
             document.getElementById("tabavg").innerHTML=  "Average time: "+ss+"/"+c;
             break;
+        case "SRT":
+            var dt = copy(data);
+            var T = true,g = parseInt(dt[0][1]);
+            tg.innerHTML = "SRT Gantt Chart ▼ "
+            pt +="<th>"+ g+"</th>";
+            while (T)
+            {
+                for(var i = 0 ;i<data.length;i++)
+                {
+                    var m= parseInt(ismine(dt[i],dt,g))
+                    if (m ==0)
+                        continue;
+                    if (m== -1) {
+                        T = false;
+                        break;
+                    }
+                    dt[i][0] = parseInt(dt[i][0]) -parseInt(m);
+                    g += parseInt(m);
+                    if(parseInt(dt[i][0]) == 0)
+                        ss = parseInt(g)-(parseInt(data[i][0])+parseInt(dt[i][1]))+ss;
+                    pt +="<th>"+g+"</th>";
+                    pn +=  "<td>p"+ parseInt(data[i][2]) +"</td>";
+
+
+                }
+            }
+            document.getElementById("tabavg").innerHTML=  "Average time: "+ss+"/"+c;
+            break;
 
     }
     document.getElementById("pt").innerHTML=pt;
@@ -185,6 +213,7 @@ function process() {
 function reset() {
     data = [];
     c=0;
+    b=0;
     document.getElementById("tabdata").innerHTML = "";
     document.getElementById("pt").innerHTML="";
     document.getElementById("pn").innerHTML="";
@@ -192,5 +221,32 @@ function reset() {
     document.getElementById("tabhead").innerHTML = "";
     $("#proc").prop('disabled', true);
     $("#reset").prop('disabled', true);
+
+}
+
+function ismine(x,dt,g,o) {
+    var m = x[0];
+    var cz =0;
+    for (var i= 0 ;i<dt.length;i++)
+    {   var z0 =parseInt(x[0])-parseInt(dt[i][1]);
+        if(parseInt(x[0])>parseInt(dt[i][0])&&parseInt(dt[i][1])<= parseInt(g)&&parseInt(dt[i][0])!=0)
+            return 0;
+        if(parseInt(dt[i][0]) < parseInt(x[0]) && parseInt(z0)>0&&parseInt(dt[i][0])!=0&& (parseInt(x[0])-parseInt(dt[i][1])+parseInt(g)>parseInt(dt[i][0])) )
+            return parseInt(dt[i][1])-parseInt(g);
+        if(parseInt(dt[i][0])==0)
+            cz++;
+
+    }
+    if(cz == dt.length)
+        return -1;
+    return m;
+}
+function copy(data) {
+    var dt = [];
+    for (var i =0;i<data.length;i++)
+    {
+        dt[i] = [data[i][0],data[i][1],data[i][2]]
+    }
+    return dt;
 
 }
